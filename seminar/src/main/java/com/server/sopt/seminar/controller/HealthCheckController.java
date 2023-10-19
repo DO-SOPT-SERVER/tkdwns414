@@ -45,7 +45,12 @@ public class HealthCheckController {
     }
 
     @GetMapping("/v6")
-    public ApiResponse<HealthCheckResponse> healthCheckV6() {
+    public ApiResponse healthCheckV6() {
         return new ApiResponse<>(200, "OK", true);
+    }
+
+    @GetMapping("/v7")
+    public ApiResponse<String> healthCheckV7() {
+        return new ApiResponse<String>(200, "OK", true, "Hello");
     }
 }
