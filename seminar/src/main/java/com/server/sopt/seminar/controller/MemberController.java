@@ -1,6 +1,7 @@
 package com.server.sopt.seminar.controller;
 
 import com.server.sopt.seminar.dto.request.MemberCreateRequest;
+import com.server.sopt.seminar.dto.request.MemberSOPTUpdateRequest;
 import com.server.sopt.seminar.dto.response.MemberGetResponse;
 import com.server.sopt.seminar.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -41,5 +42,17 @@ public class MemberController {
     @GetMapping
     public ResponseEntity<List<MemberGetResponse>> getMembersProfile(){
         return ResponseEntity.ok(memberService.getMembers());
+    }
+
+    @PatchMapping("/{memberId}")
+    public ResponseEntity<Void> updateMemberSoptInfo(@PathVariable Long memberId, @RequestBody MemberSOPTUpdateRequest request){
+        memberService.updateSOPT(memberId, request);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{memberId}")
+    public ResponseEntity<Void> deleteMember(@PathVariable Long memberId){
+        memberService.deleteMember(memberId);
+        return ResponseEntity.noContent().build();
     }
 }

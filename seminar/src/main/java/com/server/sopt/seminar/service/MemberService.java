@@ -1,8 +1,10 @@
 package com.server.sopt.seminar.service;
 
 import com.server.sopt.seminar.dto.request.MemberCreateRequest;
+import com.server.sopt.seminar.dto.request.MemberSOPTUpdateRequest;
 import com.server.sopt.seminar.dto.response.MemberGetResponse;
 import com.server.sopt.seminar.entity.Member;
+import com.server.sopt.seminar.entity.SOPT;
 import com.server.sopt.seminar.repository.MemberRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -32,19 +34,13 @@ public class MemberService {
         return MemberGetResponse.of(memberRepository.findByIdOrThrow(memberId));
     }
 
-    // 28번 줄에서는 interface에서 default로 만든 메소드를 사용했지만이렇게 private 메소드를 Service 내부에 만들어서 써도 됨
-    private Member findById(Long memberId){
-        return memberRepository.findById(memberId)
-                .orElseThrow(() -> new EntityNotFoundException("해당하는 회원이 없습니다."));
-    }
-
     @Transactional
     public String create(MemberCreateRequest request){
         Member member = memberRepository.save(Member.builder()
-                .name(request.getName())
-                .nickname(request.getNickname())
-                .age(request.getAge())
-                .sopt(request.getSopt())
+                .name(request.name())
+                .nickname(request.nickname())
+                .age(request.age())
+                .sopt(request.sopt())
                 .build());
         return member.getId().toString();
     }
@@ -54,5 +50,23 @@ public class MemberService {
                 .stream()
                 .map(MemberGetResponse::of)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void updateSOPT(Long memberId, MemberSOPTUpdateRequest request){
+        Member member = memberRepository.findByIdOrThrow(memberId);
+        member.updateSOPT(new SOPT(request.generation(), request.part()));
+    }
+
+    @Transactional
+    public void deleteMember(Long memberId){
+        Member member = memberRepository.findByIdOrThrow(memberId);
+        memberRepository.delete(member);
+    }
+
+    // 28번 줄에서는 interface에서 default로 만든 메소드를 사용했지만이렇게 private 메소드를 Service 내부에 만들어서 써도 됨
+    private Member findById(Long memberId){
+        return memberRepository.findById(memberId)
+                .orElseThrow(() -> new EntityNotFoundException("해당하는 회원이 없습니다."));
     }
 }
