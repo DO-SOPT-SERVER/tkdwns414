@@ -1,4 +1,4 @@
-package com.server.sopt.seminar.dto.request;
+package com.server.sopt.seminar.dto.request.member;
 
 import com.server.sopt.seminar.entity.Part;
 

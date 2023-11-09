@@ -1,8 +1,8 @@
 package com.server.sopt.seminar.service;
 
-import com.server.sopt.seminar.dto.request.MemberCreateRequest;
-import com.server.sopt.seminar.dto.request.MemberSOPTUpdateRequest;
-import com.server.sopt.seminar.dto.response.MemberGetResponse;
+import com.server.sopt.seminar.dto.request.member.MemberCreateRequest;
+import com.server.sopt.seminar.dto.request.member.MemberSOPTUpdateRequest;
+import com.server.sopt.seminar.dto.response.member.MemberGetResponse;
 import com.server.sopt.seminar.entity.Member;
 import com.server.sopt.seminar.entity.SOPT;
 import com.server.sopt.seminar.repository.MemberRepository;

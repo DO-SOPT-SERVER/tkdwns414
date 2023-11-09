@@ -1,8 +1,8 @@
 package com.server.sopt.seminar.controller;
 
-import com.server.sopt.seminar.dto.request.MemberCreateRequest;
-import com.server.sopt.seminar.dto.request.MemberSOPTUpdateRequest;
-import com.server.sopt.seminar.dto.response.MemberGetResponse;
+import com.server.sopt.seminar.dto.request.member.MemberCreateRequest;
+import com.server.sopt.seminar.dto.request.member.MemberSOPTUpdateRequest;
+import com.server.sopt.seminar.dto.response.member.MemberGetResponse;
 import com.server.sopt.seminar.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
