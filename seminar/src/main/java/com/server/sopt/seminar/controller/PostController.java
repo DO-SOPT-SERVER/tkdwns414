@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -20,14 +21,18 @@ public class PostController {
     private static final String CUSTOM_AUTH_ID = "X-Auth-Id";
 
     @PostMapping
-    public ResponseEntity<Void> createPost(@RequestHeader(CUSTOM_AUTH_ID) Long memberId,
+    public ResponseEntity<Void> createPost(Principal principal,
                                            @RequestBody PostCreateRequest request){
+        Long memberId = Long.valueOf(principal.getName());
+        System.out.println("memberId! = " + memberId);
         URI location = URI.create("/api/posts/" + postService.create(memberId, request));
         return ResponseEntity.created(location).build();
     }
 
     @GetMapping
-    public ResponseEntity<List<PostGetResponse>> getPosts(@RequestHeader(CUSTOM_AUTH_ID) Long memberId){
+    public ResponseEntity<List<PostGetResponse>> getPosts(Principal principal){
+        Long memberId = Long.valueOf(principal.getName());
+        System.out.println("memberId = " + memberId);
         return ResponseEntity.ok(postService.getPosts(memberId));
     }
 

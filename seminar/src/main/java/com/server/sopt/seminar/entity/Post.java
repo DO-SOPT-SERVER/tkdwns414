@@ -22,11 +22,20 @@ public class Post extends BaseTimeEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    private String imageUrl;
     @Builder
     public Post(String title, String content, Member member) {
         this.title = title;
         this.content = content;
         this.member = member;
+    }
+
+    @Builder(builderMethodName = "builderWithImageUrl") // builder 구분을 위
+    public Post(String title, String content, Member member, String imageUrl) {
+        this.title = title;
+        this.content = content;
+        this.member = member;
+        this.imageUrl = imageUrl;
     }
 
     public void updateContent(String content) {
