@@ -1,0 +1,4 @@
+rootProject.name = 'seminar'
+include 'src:main:controller'
+findProject(':src:main:controller')?.name = 'controller'
+
